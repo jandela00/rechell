@@ -83,3 +83,41 @@
   zin.addEventListener('click', function () { if (z < MAX) { z++; apply(); } });
   zout.addEventListener('click', function () { if (z > MIN) { z--; apply(); } });
 })();
+
+// mobile menu toggle
+(function () {
+  var header = document.querySelector('.header');
+  var btn = document.querySelector('.nav__toggle');
+  if (!btn) return;
+  function set(open) {
+    header.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  }
+  btn.addEventListener('click', function () { set(!header.classList.contains('is-open')); });
+  document.querySelectorAll('.nav__menu a').forEach(function (a) {
+    a.addEventListener('click', function () { set(false); });
+  });
+  window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+})();
+
+// hero: play top_vod1 -> top_vod2 -> top_vod1 ... with a short crossfade
+(function () {
+  var vids = document.querySelectorAll('.hero__video');
+  if (vids.length < 2) return;
+  var cur = 0;
+  function swap() {
+    var from = vids[cur], to = vids[1 - cur];
+    to.currentTime = 0;
+    var p = to.play();
+    if (p && p.catch) p.catch(function () {});
+    to.classList.add('is-active');
+    from.classList.remove('is-active');
+    setTimeout(function () { from.pause(); from.currentTime = 0; }, 700);
+    cur = 1 - cur;
+  }
+  vids.forEach(function (v, i) {
+    v.addEventListener('ended', function () { if (i === cur) swap(); });
+  });
+})();

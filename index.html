@@ -14,8 +14,9 @@
 
 <header class="header">
   <div class="nav">
-    <a href="#top" class="nav__logo"><img src="assets/logo.png" alt="Richell" class="logo--default"><img src="assets/logo_scroll.png" alt="Richell" class="logo--scrolled"></a>
-    <nav class="nav__menu">
+    <a href="#top" class="nav__logo" aria-label="Richell 홈"><img src="assets/logo.png" alt="Richell" class="logo--default"><img src="assets/logo_scroll.png" alt="Richell" class="logo--scrolled"></a>
+    <button type="button" class="nav__toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
+    <nav class="nav__menu" id="nav-menu">
       <a href="#company">COMPANY</a>
       <a href="#service">SERVICE</a>
       <a href="#partners">PARTNERS</a>
@@ -27,7 +28,8 @@
 
 <main>
   <section class="hero" id="top">
-    <video class="hero__video" src="assets/top_vod.mp4" autoplay muted loop playsinline></video>
+    <video class="hero__video is-active" src="assets/top_vod1.mp4" autoplay muted playsinline preload="auto"></video>
+    <video class="hero__video" src="assets/top_vod2.mp4" muted playsinline preload="auto"></video>
     <div class="hero__dim"></div>
     <div class="hero__inner">
       <p class="hero__eyebrow">Your Best Service Partner</p>
@@ -45,25 +47,25 @@
   <section class="service" id="service">
     <div class="section-tt">
       <p class="en blue">Our Service</p>
-      <h2>체계적인 프로세스와 효율적인 관리를 통하여<br><em>확실한 방향을 제공</em>합니다.</h2>
+      <h2>체계적인 프로세스와 효율적인 관리를 통하여 <br><em>확실한 방향을 제공</em>합니다.</h2>
     </div>
     <div class="cards">
-      <article class="card" style="padding-top:80px">
-        <div class="card__img"><img src="assets/service1.png" alt="" class="cover"></div>
+      <article class="card card--a">
+        <div class="card__img"><img src="assets/service1.png" alt="" class="cover" loading="lazy" decoding="async"></div>
         <div class="card__tt">
           <h3>물류운영/컨설팅</h3>
           <p>물류비용 절감, 물류전략 수립부터<br>물류센터 레이아웃·운영설계, KPI 지표관리까지 지원합니다.</p>
         </div>
       </article>
       <article class="card">
-        <div class="card__img"><div class="crop"><img src="assets/service2.png" alt="" style="height:168.69%;left:-68.89%;top:-50.57%;width:171.93%"></div></div>
+        <div class="card__img"><div class="crop"><img src="assets/service2.png" alt="" loading="lazy" decoding="async" style="height:168.69%;left:-68.89%;top:-50.57%;width:171.93%"></div></div>
         <div class="card__tt">
           <h3>인력도급</h3>
           <p>도급의뢰부터 계약체결, 인원투입, 보고·협의까지 이어지는<br>체계적인 인력운용 프로세스를 제공합니다.</p>
         </div>
       </article>
-      <article class="card" style="padding-top:160px">
-        <div class="card__img"><img src="assets/service3.png" alt="" class="cover"></div>
+      <article class="card card--c">
+        <div class="card__img"><img src="assets/service3.png" alt="" class="cover" loading="lazy" decoding="async"></div>
         <div class="card__tt">
           <h3>채용대행</h3>
           <p>직무분석부터 채용공고, 면접, 사후관리까지<br>고객사의 채용 전 과정을 대행합니다.</p>
@@ -90,7 +92,7 @@
   </section>
 
   <section class="philosophy" id="company">
-    <div class="philosophy__bg"><img src="assets/philosophy.png" alt=""><span></span></div>
+    <div class="philosophy__bg"><img src="assets/philosophy.png" alt="" loading="lazy" decoding="async"><span></span></div>
     <div class="section-tt white">
       <p class="en">Management Philosophy</p>
       <h2>인재를 신뢰하고 기업의 가치를 창조합니다.</h2>
@@ -122,7 +124,7 @@
       <p class="en blue">Our Location</p>
       <h2 class="black">리첼에 오시는 길</h2>
     </div>
-    <div class="map"><iframe title="리첼 오시는 길 지도" src="https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1z6rK96riw64-EIOyaqeyduOyLnCDsspjsnbjqtawg7KSR67aA64yA66GcIDE1MTY!6i17!3m1!1sko!5m1!1sko"map"><div class="crop"><img src="assets/map.png" alt="리첼 오시는 길 지도" style="height:197.37%;left:-9.7%;top:-48.7%;width:147.38%"></div></div>hl=ko<div class="map"><div class="crop"><img src="assets/map.png" alt="리첼 오시는 길 지도" style="height:197.37%;left:-9.7%;top:-48.7%;width:147.38%"></div></div>z=17<div class="map"><div class="crop"><img src="assets/map.png" alt="리첼 오시는 길 지도" style="height:197.37%;left:-9.7%;top:-48.7%;width:147.38%"></div></div>output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <div class="map"><iframe title="리첼 오시는 길 지도" src="https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1z6rK96riw64-EIOyaqeyduOyLnCDsspjsnbjqtawg7KSR67aA64yA66GcIDE1MTY!6i17!3m1!1sko!5m1!1sko" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       <div class="map__zoom"><button type="button" class="zin" aria-label="지도 확대">+</button><button type="button" class="zout" aria-label="지도 축소">&minus;</button></div>
     </div>
     <div class="contact">

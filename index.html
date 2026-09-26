@@ -6,7 +6,7 @@
 <title>Richell 리첼</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -17,10 +17,12 @@
     <a href="#top" class="nav__logo" aria-label="Richell 홈"><img src="assets/logo.png" alt="Richell" class="logo--default"><img src="assets/logo_scroll.png" alt="Richell" class="logo--scrolled"></a>
     <button type="button" class="nav__toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     <nav class="nav__menu" id="nav-menu">
-      <a href="#company">COMPANY</a>
-      <a href="#service">SERVICE</a>
-      <a href="#partners">PARTNERS</a>
-      <a href="#workspace">WORKSPACE</a>
+      <div class="nav__links">
+        <a href="#company">COMPANY</a>
+        <a href="#service">SERVICE</a>
+        <a href="#partners">PARTNERS</a>
+        <a href="#workspace">WORKSPACE</a>
+      </div>
       <a href="#contact" class="nav__cta">상담ㆍ견적 요청</a>
     </nav>
   </div>
@@ -80,13 +82,16 @@
       <h2>리첼은 파트너사와 <em>함께 성장</em>합니다.</h2>
     </div>
     <div class="logos"><div class="logos__track">
-      <div class="lg" style="width:281px;height:100px"><img src="assets/p1.png" alt="LX판토스" style="left:0;width:100%;top:24%;height:52%"></div>
-      <div class="lg" style="width:255px;height:100px"><img src="assets/p2.png" alt="DWCTS" style="left:0;width:100%;top:12%;height:76%"></div>
-      <div class="lg" style="width:377px;height:100px"><img src="assets/p3.png" alt="롯데글로벌로지스" style="left:0;width:100%;top:10%;height:80%"></div>
-      <div class="lg" style="width:215px;height:100px"><img src="assets/p4.png" alt="CJW" style="left:0;width:100%;top:13%;height:74%"></div>
-      <div class="lg" style="width:173px;height:80px"><img src="assets/p5.png" alt="그레인온" class="l0" style="width:172px;height:80px"></div>
-      <div class="lg" style="width:308px;height:80px"><img src="assets/p6.png" alt="이지컴" class="l0" style="width:307px;height:62px"></div>
-      <div class="lg" style="width:204px;height:100px"><img src="assets/p7.png" alt="코카콜라" class="l0" style="width:203px;height:64px"></div>
+      <div class="lg" style="width:281px;height:100px"><img src="assets/partners/01_lx.png" alt="LX판토스" style="left:0;width:100%;top:24%;height:52%"></div>
+      <div class="lg" style="width:255px;height:100px"><img src="assets/partners/02_dwcts.png" alt="DWCTS" style="left:0;width:100%;top:12%;height:76%"></div>
+      <div class="lg" style="width:377px;height:100px"><img src="assets/partners/03_lotte.png" alt="롯데글로벌로지스" style="left:0;width:100%;top:10%;height:80%"></div>
+      <div class="lg" style="width:336px;height:100px"><img src="assets/partners/04_starpack.png" alt="STARPACK" class="l0" style="width:336px;height:78px"></div>
+      <div class="lg" style="width:215px;height:100px"><img src="assets/partners/05_cjfoodville.png" alt="CJ푸드빌" class="l0" style="width:215px;height:96px"></div>
+      <div class="lg" style="width:283px;height:100px"><img src="assets/partners/06_brandstory.png" alt="빵집오빠" class="l0" style="width:283px;height:96px"></div>
+      <div class="lg" style="width:215px;height:100px"><img src="assets/partners/07_cjw.png" alt="청정원" class="lc" style="width:196px;height:68px"></div>
+      <div class="lg" style="width:173px;height:80px"><img src="assets/partners/08_grainon.png" alt="그레인온" class="l0" style="width:172px;height:80px"></div>
+      <div class="lg" style="width:308px;height:80px"><img src="assets/partners/09_ezcom.png" alt="이지컴" class="l0" style="width:307px;height:62px"></div>
+      <div class="lg" style="width:204px;height:100px"><img src="assets/partners/10_cocacola.png" alt="코카콜라" class="l0" style="width:203px;height:64px"></div>
     </div>
     </div>
   </section>
@@ -100,41 +105,59 @@
     <div class="values">
       <div class="value">
         <div class="value__in bordered">
-          <div class="icon"><img src="assets/icon1.svg" alt="" style="width:77px;height:45px;left:50%;top:calc(50% + 3px);transform:translate(-50%,-50%)"></div>
-          <div class="value__txt"><p class="ko">인재중시</p><p class="sub">People First</p></div>
+          <div class="value__txt"><p class="ko">인재중시</p><p class="sub">People First</p><p class="desc">우수한 인재를 발굴 및 양성하여<br>맞춤형 인재가 될 수 있도록 지원하는 기업</p></div>
         </div>
       </div>
       <div class="value">
         <div class="value__in bordered">
-          <div class="icon"><img src="assets/icon2.svg" alt="" style="inset:19.38% -0.61% 11.86% 0.63%;width:100.61%;height:68.76%"></div>
-          <div class="value__txt"><p class="ko">신뢰경영</p><p class="sub">Trust-Based Management</p></div>
+          <div class="value__txt"><p class="ko">신뢰경영</p><p class="sub">Trust-Based Management</p><p class="desc">기본 원칙에 충실하여<br>신뢰도가 높은 기업</p></div>
         </div>
       </div>
       <div class="value">
         <div class="value__in">
-          <div class="icon"><img src="assets/icon3.svg" alt="" style="left:11.25%;top:3.13%;width:76.7%;height:93.75%"></div>
-          <div class="value__txt"><p class="ko">가치창조</p><p class="sub">Value Creation</p></div>
+          <div class="value__txt"><p class="ko">가치창조</p><p class="sub">Value Creation</p><p class="desc">신뢰와 건전한 사업활동을 통하여<br>결과가 도출될 수 있다는 꿈을 실현하는 기업</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="location" id="contact">
-    <div class="section-tt abs">
-      <p class="en blue">Our Location</p>
-      <h2 class="black">리첼에 오시는 길</h2>
-    </div>
+  <section class="mapband" aria-label="오시는 길">
     <div class="map"><iframe title="리첼 오시는 길 지도" src="https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1z6rK96riw64-EIOyaqeyduOyLnCDsspjsnbjqtawg7KSR67aA64yA66GcIDE1MTY!6i17!3m1!1sko!5m1!1sko" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       <div class="map__zoom"><button type="button" class="zin" aria-label="지도 확대">+</button><button type="button" class="zout" aria-label="지도 축소">&minus;</button></div>
     </div>
-    <div class="contact">
-      <div class="contact__in">
-        <div class="contact__head">
-          <p class="en">Contact Us</p>
-        <p class="contact__tt">함께 성장하는 파트너가 되겠습니다.</p>
-          <p class="contact__desc">리첼 서비스에 대해 궁금하신 사항을 문의해 주세요.<br>빠르게 확인하고 연락드리겠습니다.</p>
+  </section>
+
+  <section class="contact-us" id="contact">
+    <div class="cu__wrap">
+      <div class="cu__head">
+        <p class="cu__eyebrow">언제든지 편하게 문의해 주세요.</p>
+        <p class="cu__title">CONTACT US</p>
+      </div>
+      <div class="cu__row">
+        <div class="cu__info">
+          <div class="cu__msg">
+            <h3>함께 성장하는 파트너가 되겠습니다.</h3>
+            <p>리첼 서비스에 대해 궁금하신 사항을 문의해 주세요.<br>빠르게 확인하고 연락드리겠습니다.</p>
+          </div>
+          <dl class="cu__contacts">
+            <div><dt>전화.</dt><dd>031-526-6680</dd></div>
+            <div><dt>팩스.</dt><dd>031-526-6690</dd></div>
+            <div class="cu__addr"><dt>주소.</dt><dd>경기도 용인시 처인구 중부대로 1516, MS빌딩 303호</dd></div>
+          </dl>
         </div>
-        <a href="#" class="btn btn--lg">문의하러가기&nbsp;&nbsp;&nbsp;&nbsp;→</a>
+        <form class="cu__form" novalidate>
+          <div class="f-row">
+            <label class="f"><span>작성자명 *</span><input type="text" name="name" placeholder="성함을 입력해주세요" required autocomplete="name"></label>
+            <label class="f"><span>회사명 *</span><input type="text" name="company" placeholder="회사명을 입력해주세요" required autocomplete="organization"></label>
+          </div>
+          <label class="f f--wide"><span>메일 주소 *</span><input type="email" name="email" placeholder="name@company.com" required autocomplete="email"></label>
+          <label class="f f--wide f--phone"><span>연락처 *</span><input type="tel" name="phone" placeholder="연락받으실 번호를 입력해주세요" required autocomplete="tel"></label>
+          <label class="f f--wide f--text"><span>문의 내용 *</span><textarea name="message" placeholder="문의하실 내용을 자유롭게 작성해주세요." required></textarea></label>
+          <div class="f-foot">
+            <p class="f-msg" role="status">필수 항목을 모두 입력해주세요.</p>
+            <button type="submit" class="f-btn"><span>문의하기</span><img src="assets/arrow_icon.svg" alt="" width="20" height="20"></button>
+          </div>
+        </form>
       </div>
     </div>
   </section>

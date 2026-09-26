@@ -12,7 +12,7 @@
     '.logos',
     '.value__in',
     '.map',
-    '.contact__head > *, .contact__in > .btn',
+    '.cu__head, .cu__info, .cu__form',
     '.footer__in'
   ];
   var els = [];
@@ -119,5 +119,36 @@
   }
   vids.forEach(function (v, i) {
     v.addEventListener('ended', function () { if (i === cur) swap(); });
+  });
+})();
+
+// contact form: required-field validation (no submit backend connected yet)
+(function () {
+  var form = document.querySelector('.cu__form');
+  if (!form) return;
+  var msg = form.querySelector('.f-msg');
+  var defaultMsg = msg.textContent;
+  function ok(el) {
+    var v = el.value.trim();
+    if (!v) return false;
+    if (el.type === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    if (el.type === 'tel') return /^[0-9+\-\s()]{7,}$/.test(v);
+    return true;
+  }
+  form.querySelectorAll('input,textarea').forEach(function (el) {
+    el.addEventListener('input', function () {
+      if (ok(el)) el.closest('.f').classList.remove('is-invalid');
+    });
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var first = null;
+    form.querySelectorAll('input,textarea').forEach(function (el) {
+      var good = ok(el);
+      el.closest('.f').classList.toggle('is-invalid', !good);
+      if (!good && !first) first = el;
+    });
+    if (first) { msg.textContent = defaultMsg; first.focus(); return; }
+    msg.textContent = '문의 접수 기능은 아직 연동되지 않았습니다.';
   });
 })();

@@ -10,7 +10,7 @@
     '.section-tt > *',
     '.card__img, .card__tt',
     '.logos',
-    '.value__in',
+    '.edge',
     '.map',
     '.cu__head, .cu__info, .cu__form',
     '.footer__in'

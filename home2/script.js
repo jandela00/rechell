@@ -54,22 +54,14 @@ const update = () => {
   introLines.forEach((el, i) => setLine(el, reduceMotion ? 1 : clamp((ip - i * 0.12) / 0.35)));
 };
 
-// Our Partners : 화면 고정 → 빈 화면에서 잠시 머문 뒤 스크롤 진행에 따라 로고가 하나씩 페이드 업
+// Our Partners : 섹션이 화면 절반 이상 들어오면 로고가 자동으로 하나씩 페이드 업
 const partnersSec = document.getElementById('partners');
-const partnersPin = partnersSec.querySelector('.partners__pin');
-const partnerLogos = [...partnersSec.querySelectorAll('.partners__logos li')];
 const edgeSec = document.getElementById('edge');
-const LOGO_START = 0.2; // 앞 20% 구간은 타이틀만
-const LOGO_END = 0.85;  // 뒤 15% 구간은 전체 로고 상태로 머무름
-const syncPartners = () => {
-  const scrub = partnersSec.offsetHeight - partnersPin.offsetHeight;
-  const p = scrub > 0 ? clamp(-partnersSec.getBoundingClientRect().top / scrub) : 1;
-  const count = Math.ceil(clamp((p - LOGO_START) / (LOGO_END - LOGO_START)) * partnerLogos.length);
-  partnerLogos.forEach((li, i) => li.classList.toggle('is-in', i < count));
-};
-addEventListener('scroll', syncPartners, { passive: true });
-addEventListener('resize', syncPartners);
-syncPartners();
+partnersSec.querySelectorAll('.partners__logos li').forEach((li, i) => li.style.setProperty('--i', i));
+const partnersIO = new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) { partnersSec.classList.add('is-in'); partnersIO.disconnect(); }
+}, { rootMargin: '0px 0px -50% 0px' });
+partnersIO.observe(partnersSec);
 
 const requestUpdate = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
 addEventListener('scroll', requestUpdate, { passive: true });

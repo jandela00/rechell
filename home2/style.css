@@ -63,7 +63,8 @@
   --service-offset: 150vh;
   --edge-pad-y: 16vh;
   --edge-step: 100vh;
-  --partners-h: 400vh; /* 빈 화면 머무름 + 로고 10개 순차 등장 구간 */
+  --partners-h: 150vh; /* 화면 고정 후 잠시 머무는 구간 */
+  --logo-stagger: 0.15s; /* 로고 순차 등장 간격 */
   --map-h: clamp(300px, 40vw, 600px);
   --form-h: 783px;
   --form-w: max(35.16vw, 560px); /* 2560 기준 900px */
@@ -376,7 +377,7 @@ html.lenis, html.lenis body { height: auto; }
 /* =========================================================
    Our Partners
    ========================================================= */
-/* 화면 고정 → 타이틀만 보이는 빈 화면에서 머문 뒤, 스크롤 따라 로고가 하나씩 페이드 업(script.js) */
+/* 화면 고정 · 섹션이 화면에 들어오면 로고가 자동으로 하나씩 페이드 업(script.js) */
 .partners {
   position: relative;
   height: var(--partners-h);
@@ -409,7 +410,8 @@ html.lenis, html.lenis body { height: auto; }
   opacity: 0;
   filter: blur(6px);
   transform: translateY(var(--reveal-y));
-  transition: opacity 0.6s var(--ease), filter 0.6s var(--ease), transform 0.6s var(--ease);
+  transition: opacity 0.8s var(--ease), filter 0.8s var(--ease), transform 0.8s var(--ease);
+  transition-delay: calc(var(--i, 0) * var(--logo-stagger) + 0.4s);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -421,7 +423,7 @@ html.lenis, html.lenis body { height: auto; }
   max-width: 100%;
   object-fit: contain;
 }
-.partners__logos li.is-in { opacity: 1; filter: blur(0); transform: none; }
+.partners.is-in .partners__logos li { opacity: 1; filter: blur(0); transform: none; }
 .logo--lx          { --logo-h: 52; }
 .logo--dwcts       { --logo-h: 76; }
 .logo--lotte       { --logo-h: 80; }

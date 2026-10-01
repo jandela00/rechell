@@ -54,37 +54,22 @@ const update = () => {
   introLines.forEach((el, i) => setLine(el, reduceMotion ? 1 : clamp((ip - i * 0.12) / 0.35)));
 };
 
-// Our Partners → Our Edge : 로고가 지나가고 빈 여백이 화면 반 이상이면 Our Edge로, 다시 올리면 Partners 처음으로 이동
+// Our Partners : 화면 고정 → 빈 화면에서 잠시 머문 뒤 스크롤 진행에 따라 로고가 하나씩 페이드 업
 const partnersSec = document.getElementById('partners');
-const partnersLogos = partnersSec.querySelector('.partners__logos');
+const partnersPin = partnersSec.querySelector('.partners__pin');
+const partnerLogos = [...partnersSec.querySelectorAll('.partners__logos li')];
 const edgeSec = document.getElementById('edge');
-let lastY = window.scrollY;
-let snapping = false;
-const pageTop = (el) => el.getBoundingClientRect().top + window.scrollY;
-const snapTo = (y) => {
-  snapping = true;
-  const done = () => { snapping = false; lastY = window.scrollY; };
-  if (lenis) lenis.scrollTo(y, { duration: 1, lock: true, onComplete: done });
-  else {
-    window.scrollTo({ top: y, behavior: reduceMotion ? 'instant' : 'smooth' });
-    let timer = setTimeout(done, 1200);
-    addEventListener('scrollend', () => { clearTimeout(timer); done(); }, { once: true });
-  }
+const LOGO_START = 0.2; // 앞 20% 구간은 타이틀만
+const LOGO_END = 0.85;  // 뒤 15% 구간은 전체 로고 상태로 머무름
+const syncPartners = () => {
+  const scrub = partnersSec.offsetHeight - partnersPin.offsetHeight;
+  const p = scrub > 0 ? clamp(-partnersSec.getBoundingClientRect().top / scrub) : 1;
+  const count = Math.ceil(clamp((p - LOGO_START) / (LOGO_END - LOGO_START)) * partnerLogos.length);
+  partnerLogos.forEach((li, i) => li.classList.toggle('is-in', i < count));
 };
-addEventListener('scroll', () => {
-  const y = window.scrollY;
-  const dir = y - lastY;
-  lastY = y;
-  if (snapping || dir === 0) return;
-  const start = pageTop(partnersSec);
-  const end = pageTop(edgeSec);
-  if (y <= start || y >= end) return;
-  // 로고 아래 빈 여백이 화면의 반 이상 보이는 지점 = 기준선
-  const contentBottom = pageTop(partnersLogos) + partnersLogos.offsetHeight;
-  const trigger = Math.min(end - 1, Math.max(start + 1, contentBottom - innerHeight * 0.5));
-  if (dir > 0 && y >= trigger) snapTo(end);
-  else if (dir < 0 && y < trigger) snapTo(start);
-}, { passive: true });
+addEventListener('scroll', syncPartners, { passive: true });
+addEventListener('resize', syncPartners);
+syncPartners();
 
 const requestUpdate = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
 addEventListener('scroll', requestUpdate, { passive: true });
@@ -135,10 +120,13 @@ const show = (i) => {
 const edgeTrack = document.querySelector('.edge__track');
 const lastIdx = images.length - 1;
 const smooth = (x) => x * x * (3 - 2 * x);
-const edgeScrub = () => edgeSec.offsetHeight - innerHeight;
+const edgePin = edgeSec.querySelector('.edge__pin');
+const edgeScrub = () => edgeSec.offsetHeight - edgePin.offsetHeight;
+const EDGE_HOLD = 0.12;
 const syncEdge = () => {
   const scrub = edgeScrub();
-  const p = scrub > 0 ? clamp(-edgeSec.getBoundingClientRect().top / scrub) : 0;
+  const raw = scrub > 0 ? clamp(-edgeSec.getBoundingClientRect().top / scrub) : 0;
+  const p = clamp((raw - EDGE_HOLD) / (1 - EDGE_HOLD * 2)); // 들어오면 잠깐 멈춤 → 3장 롤링 → 끝에서 잠깐 머문 뒤 다음 섹션
   const seg = p * lastIdx;
   const base = Math.min(Math.floor(seg), lastIdx - 1);
   const move = smooth(clamp((seg - base - 0.15) / 0.7));

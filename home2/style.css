@@ -61,11 +61,13 @@
   --reveal-y: 40px;
   --rise-y: 120px;
   --service-offset: 150vh;
-  --edge-pad-y: 20vh;
+  --edge-pad-y: 16vh;
   --edge-step: 100vh;
-  --partners-h: 150vh;
+  --partners-h: 400vh; /* 빈 화면 머무름 + 로고 10개 순차 등장 구간 */
   --map-h: clamp(300px, 40vw, 600px);
   --form-h: 783px;
+  --form-w: max(35.16vw, 560px); /* 2560 기준 900px */
+  --form-pad-x: clamp(24px, 3.9vw, 100px);
   --logo-unit: clamp(0.4px, 0.039vw, 1px);
   --logo-top: clamp(64px, 5.86vw, 150px);
   --logo-row-gap: clamp(40px, 4.69vw, 120px);
@@ -362,12 +364,20 @@ html.lenis, html.lenis body { height: auto; }
 /* =========================================================
    Our Partners
    ========================================================= */
-/* 1.5화면 높이 · 내용은 위쪽, 아래 빈 여백이 화면 반 이상 보이면 Our Edge로 자동 이동(script.js) */
+/* 화면 고정 → 타이틀만 보이는 빈 화면에서 머문 뒤, 스크롤 따라 로고가 하나씩 페이드 업(script.js) */
 .partners {
+  position: relative;
+  height: var(--partners-h);
+}
+.partners__pin {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
-  min-height: var(--partners-h);
-  padding: var(--section-y) var(--gutter);
+  height: 100vh;
+  height: 100svh;
+  padding: max(var(--section-y), calc(var(--header-h) + var(--gap-lg))) var(--gutter) 0;
+  overflow: hidden;
 }
 .partners__head {
   display: flex;
@@ -384,6 +394,10 @@ html.lenis, html.lenis body { height: auto; }
   padding: var(--logo-top) calc(30 * var(--logo-unit)) 0;
 }
 .partners__logos li {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(var(--reveal-y));
+  transition: opacity 0.6s var(--ease), filter 0.6s var(--ease), transform 0.6s var(--ease);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -395,6 +409,7 @@ html.lenis, html.lenis body { height: auto; }
   max-width: 100%;
   object-fit: contain;
 }
+.partners__logos li.is-in { opacity: 1; filter: blur(0); transform: none; }
 .logo--lx          { --logo-h: 52; }
 .logo--dwcts       { --logo-h: 76; }
 .logo--lotte       { --logo-h: 80; }
@@ -409,11 +424,11 @@ html.lenis, html.lenis body { height: auto; }
 /* =========================================================
    Our Edge
    ========================================================= */
-/* 섹션을 화면에 고정하고, 세로 스크롤만큼 오른쪽 사진 3장이 가로로 넘어감
-   (섹션 높이 = 사진 수 × --edge-step) */
+/* 네비 포함 화면 전체 크기로 고정 → 세로 스크롤만큼 오른쪽 사진 3장이 가로로 넘어간 뒤 다음 섹션
+   (섹션 높이 = (사진 수 + 1) × --edge-step, 앞뒤로 잠깐 머무름) */
 .edge {
   position: relative;
-  height: calc(3 * var(--edge-step));
+  height: calc(4 * var(--edge-step));
   background: var(--color-bg);
 }
 .edge__pin {
@@ -431,7 +446,7 @@ html.lenis, html.lenis body { height: auto; }
   flex-direction: column;
   gap: var(--gap-xl);
   height: 100%;
-  padding: var(--edge-pad-y) 0;
+  padding: max(var(--edge-pad-y), calc(var(--header-h) + var(--gap-md))) 0 var(--edge-pad-y);
 }
 .edge__dots { margin-top: auto; }
 /* 절반 폭 칼럼에서 한 줄 유지 */
@@ -482,15 +497,21 @@ html.lenis, html.lenis body { height: auto; }
   will-change: transform;
 }
 .edge__img {
+  position: relative;
   flex: 0 0 100%;
   height: 100%;
   overflow: hidden;
 }
+/* 화면 꽉 채움 · 초점은 Figma 크롭 위치 기준 */
 .edge__img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: var(--focus);
 }
+.edge__img:nth-child(1) { --focus: 57% 0%; }
+.edge__img:nth-child(2) { --focus: 54% 50%; }
+.edge__img:nth-child(3) { --focus: 35% 59%; }
 
 /* =========================================================
    Map
@@ -509,12 +530,12 @@ html.lenis, html.lenis body { height: auto; }
   padding: var(--section-y) var(--gutter);
   background: var(--color-bg-gray);
 }
-.contact__info { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: var(--gap-xl); }
+.contact__info { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: var(--gap-xl); padding-right: 100px; }
 .contact__lead { display: flex; flex-direction: column; gap: var(--gap-sm); }
 .contact__title {
   font-weight: 700;
   font-size: var(--fs-h4);
-  line-height: 1.1;
+  line-height: 1;
   letter-spacing: -0.025em;
   color: var(--color-text-dark);
 }
@@ -531,9 +552,9 @@ html.lenis, html.lenis body { height: auto; }
 
 .form {
   flex-shrink: 0;
-  width: min(900px, 50%);
+  width: min(900px, var(--form-w));
   min-height: var(--form-h);
-  padding: 50px 100px;
+  padding: 50px var(--form-pad-x);
   border-radius: var(--radius-md);
   background: var(--color-bg);
   display: flex;
@@ -551,7 +572,8 @@ html.lenis, html.lenis body { height: auto; }
 .form__row--top label { padding-top: 20px; }
 .form__row label {
   font-weight: 500;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-body);
+  line-height: 24px;
   letter-spacing: -0.5px;
   color: #000;
 }
@@ -563,7 +585,7 @@ html.lenis, html.lenis body { height: auto; }
   border: 1px solid var(--color-line);
   border-radius: var(--radius-pill);
   background: var(--color-bg);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-body);
   outline: none;
   transition: border-color 0.2s;
 }
@@ -592,8 +614,8 @@ html.lenis, html.lenis body { height: auto; }
 .form__agree u { color: #000; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .form__note {
   padding: 20px 0 0 120px;
-  font-size: var(--fs-xs);
-  line-height: 1.46;
+  font-size: var(--fs-sm);
+  line-height: 21.9px;
   letter-spacing: -0.3px;
   color: var(--color-note);
 }
@@ -606,7 +628,7 @@ html.lenis, html.lenis body { height: auto; }
   background: var(--color-primary);
   color: #fff;
   font-weight: 500;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-body);
   letter-spacing: -0.3px;
   transition: background 0.2s;
 }
@@ -640,6 +662,7 @@ html.lenis, html.lenis body { height: auto; }
   .nav__cta { font-size: var(--fs-sm); }
 
   .contact { flex-direction: column; }
+  .contact__info { padding-right: 0; }
   .form { width: 100%; max-width: 900px; min-height: 0; padding: 40px; }
   .contact .section-title { font-size: var(--fs-display); }
 }
@@ -703,6 +726,8 @@ html.lenis, html.lenis body { height: auto; }
 
   /* 위: 텍스트 / 아래: 가로로 넘어가는 사진 */
   .edge__pin {
+    height: 100vh;
+    height: 100svh;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     padding-top: var(--header-h);

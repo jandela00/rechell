@@ -74,6 +74,7 @@
   --logo-row-gap: clamp(40px, 4.69vw, 120px);
   --logo-col-gap: clamp(24px, 3vw, 80px);
   --dur-slow: 1s;
+  --type-speed: 90ms; /* 타이핑 글자 간격 */
   --line-dur: 1.1s;
   --line-stagger: 0.18s;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -252,7 +253,7 @@ button { cursor: pointer; background: none; border: 0; }
 /* =========================================================
    Intro
    ========================================================= */
-/* 스크롤 구간(--pin-h) 동안 화면에 고정 → 문장이 블러로 나타난 뒤 다음 섹션으로 이동 */
+/* 스크롤 구간(--pin-h) 동안 화면에 고정 → 화면에 들어오면 문장이 한 글자씩 타이핑된 뒤 다음 섹션으로 이동 */
 .intro { position: relative; height: var(--pin-h); }
 .intro__stage {
   position: sticky;
@@ -269,7 +270,20 @@ button { cursor: pointer; background: none; border: 0; }
   font-size: var(--fs-intro);
   line-height: 1.2;
 }
-.intro__line { display: block; will-change: opacity, filter, transform; }
+.intro__line { display: block; }
+/* 글자 자리는 미리 잡아두고(줄바꿈 흔들림 없음) 순서대로 보이게 */
+.intro__char { visibility: hidden; }
+.intro__char.is-typed { visibility: visible; }
+.intro__caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 1em;
+  margin-left: 0.04em;
+  vertical-align: -0.1em;
+  background: currentColor;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
 
 /* 스크롤 등장 효과 */
 .reveal {

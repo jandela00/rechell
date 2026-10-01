@@ -30,12 +30,39 @@ requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('is-i
 const heroBg = document.querySelector('.hero__bg');
 const heroContent = document.querySelector('.hero__content');
 const intro = document.getElementById('intro');
-const introLines = [...intro.querySelectorAll('.intro__line')];
-const setLine = (el, s) => {
-  el.style.opacity = s.toFixed(3);
-  el.style.filter = `blur(${(16 * (1 - s)).toFixed(2)}px)`;
-  el.style.transform = `translateY(${(30 * (1 - s)).toFixed(1)}px)`;
+// 문장 타이핑 : 글자를 span으로 나눠 자리를 잡고, 화면에 들어오면 한 글자씩 표시 + 깜빡이는 커서
+const introChars = [];
+intro.querySelectorAll('.intro__line').forEach((line) => {
+  const text = line.textContent;
+  line.textContent = '';
+  line.setAttribute('aria-hidden', 'true');
+  [...text].forEach((ch) => {
+    const s = document.createElement('span');
+    s.className = 'intro__char';
+    s.textContent = ch;
+    line.appendChild(s);
+    introChars.push(s);
+  });
+});
+const caret = document.createElement('span');
+caret.className = 'intro__caret';
+introChars[0].before(caret);
+const typeSpeed = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--type-speed')) || 90;
+const typeIntro = () => {
+  let i = 0;
+  const step = () => {
+    const ch = introChars[i];
+    ch.classList.add('is-typed');
+    ch.after(caret);
+    i += 1;
+    if (i < introChars.length) setTimeout(step, ch.nextSibling === caret && !caret.nextSibling ? typeSpeed * 4 : typeSpeed);
+  };
+  step();
 };
+const introIO = new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) { typeIntro(); introIO.disconnect(); }
+}, { rootMargin: '0px 0px -50% 0px' });
+introIO.observe(intro);
 let ticking = false;
 const update = () => {
   ticking = false;
@@ -48,10 +75,6 @@ const update = () => {
     heroContent.style.transform = `translateY(${(p * -220).toFixed(1)}px)`;
   }
 
-  // 고정 구간 진행률 0 → 1 : 줄별로 블러 등장 → 유지 → 다음 섹션으로
-  const scrub = intro.offsetHeight - vh;
-  const ip = scrub > 0 ? clamp(-intro.getBoundingClientRect().top / scrub) : 1;
-  introLines.forEach((el, i) => setLine(el, reduceMotion ? 1 : clamp((ip - i * 0.12) / 0.35)));
 };
 
 // Our Partners : 섹션이 화면 절반 이상 들어오면 로고가 자동으로 하나씩 페이드 업

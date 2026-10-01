@@ -547,7 +547,7 @@ html.lenis, html.lenis body { height: auto; }
 .contact__title {
   font-weight: 700;
   font-size: var(--fs-h4);
-  line-height: 1;
+  line-height: calc(56 / 48); /* 48px 글자 기준 56px, 작은 화면은 비율 유지 */
   letter-spacing: -0.025em;
   color: var(--color-text-dark);
 }

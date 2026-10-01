@@ -30,7 +30,7 @@ requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('is-i
 const heroBg = document.querySelector('.hero__bg');
 const heroContent = document.querySelector('.hero__content');
 const intro = document.getElementById('intro');
-// 문장 타이핑 : 글자를 span으로 나눠 자리를 잡고, 화면에 들어오면 한 글자씩 표시 + 깜빡이는 커서
+// 문장 타이핑 : 글자를 span으로 나눠 자리를 잡고, 화면에 들어오면 한 글자씩 표시
 const introChars = [];
 intro.querySelectorAll('.intro__line').forEach((line) => {
   const text = line.textContent;
@@ -44,18 +44,14 @@ intro.querySelectorAll('.intro__line').forEach((line) => {
     introChars.push(s);
   });
 });
-const caret = document.createElement('span');
-caret.className = 'intro__caret';
-introChars[0].before(caret);
 const typeSpeed = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--type-speed')) || 90;
 const typeIntro = () => {
   let i = 0;
   const step = () => {
     const ch = introChars[i];
     ch.classList.add('is-typed');
-    ch.after(caret);
     i += 1;
-    if (i < introChars.length) setTimeout(step, ch.nextSibling === caret && !caret.nextSibling ? typeSpeed * 4 : typeSpeed);
+    if (i < introChars.length) setTimeout(step, ch.nextSibling ? typeSpeed : typeSpeed * 4); // 줄 끝에서 잠깐 쉼
   };
   step();
 };

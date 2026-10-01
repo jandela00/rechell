@@ -274,16 +274,6 @@ button { cursor: pointer; background: none; border: 0; }
 /* 글자 자리는 미리 잡아두고(줄바꿈 흔들림 없음) 순서대로 보이게 */
 .intro__char { visibility: hidden; }
 .intro__char.is-typed { visibility: visible; }
-.intro__caret {
-  display: inline-block;
-  width: 0.06em;
-  height: 1em;
-  margin-left: 0.04em;
-  vertical-align: -0.1em;
-  background: currentColor;
-  animation: caret-blink 1s steps(1) infinite;
-}
-@keyframes caret-blink { 50% { opacity: 0; } }
 
 /* 스크롤 등장 효과 */
 .reveal {

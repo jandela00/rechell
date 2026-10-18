@@ -5,8 +5,7 @@
   --c-brand-dark:#17309a;
   --c-brand-light:#468be6;
   --c-accent-blue:#5999f8;
-  --c-ink:#222;
-  --c-ink-strong:#0c0a09;
+  --c-ink:#222222;
   --c-black:#000;
   --c-white:#fff;
   --c-muted:#666;
@@ -162,7 +161,7 @@ em{font-style:normal;color:var(--c-brand)}
 .card__img>img,.card__img .crop img{transition:transform .6s ease}
 .card__img:hover>img{transform:scale(1.1)}
 .card__img:hover .crop img{transform:scale(1.1)}
-.card__tt{display:flex;flex-direction:column;gap:var(--gap-sm);padding-top:var(--gap-md);color:var(--c-black)}
+.card__tt{display:flex;flex-direction:column;gap:var(--gap-sm);padding-top:var(--gap-md);color:var(--c-ink)}
 .card__tt h3{font-size:var(--fs-h3);line-height:1;font-weight:600}
 .card__tt p{font-size:var(--fs-sm);line-height:1.5;color:var(--c-muted)}
 
@@ -203,7 +202,7 @@ em{font-style:normal;color:var(--c-brand)}
 .cu__wrap{width:var(--wrap);display:flex;flex-direction:column}
 .cu__head{display:flex;flex-direction:column;gap:var(--gap-sm);padding-bottom:var(--pb-cu);border-bottom:1px solid var(--c-ink)}
 .cu__eyebrow{font-size:var(--fs-base);line-height:20px;color:var(--c-brand-light)}
-.cu__title{font-size:var(--fs-display);line-height:1;font-weight:800;color:var(--c-ink-strong)}
+.cu__title{font-size:var(--fs-display);line-height:1;font-weight:800;color:var(--c-ink)}
 .cu__row{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--gap-cu-row);padding-top:var(--pb-cu)}
 .cu__info{flex:0 1 520px;min-width:0;display:flex;flex-direction:column;gap:var(--gap-cu-info)}
 .cu__msg{display:flex;flex-direction:column;gap:var(--sp-16)}
@@ -211,7 +210,7 @@ em{font-style:normal;color:var(--c-brand)}
 .cu__msg p{font-size:var(--fs-16);line-height:24px;color:var(--c-muted)}
 .cu__contacts{display:grid;grid-template-columns:repeat(2,minmax(0,242.4px));gap:var(--sp-24) var(--sp-32)}
 .cu__contacts dt{height:24px;font-size:var(--fs-16);line-height:20px;font-weight:600;color:var(--c-brand);padding-bottom:var(--sp-8)}
-.cu__contacts dd{font-family:var(--font-num);font-size:var(--fs-16);line-height:24px;color:var(--c-ink-strong)}
+.cu__contacts dd{font-family:var(--font-num);font-size:var(--fs-16);line-height:24px;color:var(--c-ink)}
 .cu__addr{grid-column:1 / -1}
 .cu__form{flex:0 1 714px;min-width:0;display:flex;flex-direction:column}
 .f-row{display:flex;gap:var(--sp-34)}

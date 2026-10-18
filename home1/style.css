@@ -70,8 +70,8 @@
   --gap-cu-row:clamp(40px,5vw,72px);
   --gap-cu-info:clamp(32px,3.61vw,52px);
   --gap-cards-mobile:clamp(40px,8vw,64px);
-  --h-edge:clamp(280px,25vw,360px);
-  --h-edge-line:clamp(160px,13.89vw,200px);
+  --h-edge:clamp(290px,25.83vw,372px);
+  --h-edge-line:clamp(160px,14.72vw,212px);
 
   /* 고정 간격(px) — 화면 크기와 무관하게 일정 */
   --sp-4:4px;
@@ -184,9 +184,9 @@ em{font-style:normal;color:var(--c-brand)}
 .philosophy>*:not(.philosophy__bg){position:relative}
 .philosophy .section-tt,.philosophy .section-tt h2{color:var(--c-white)}
 .edges{display:flex;justify-content:center;align-items:stretch;width:100%}
-.edge{position:relative;flex:1 1 0;max-width:480px;min-width:0;height:var(--h-edge);background:var(--c-overlay-40);padding:var(--gap-lg) var(--px-value);display:flex;justify-content:center;align-items:flex-start}
-.edge__text{display:flex;flex-direction:column;align-items:center;gap:var(--sp-12);text-align:center}
-.edge__line{position:absolute;right:0;top:var(--gap-lg);width:0;height:var(--h-edge-line)}
+.edge{position:relative;flex:1 1 0;max-width:480px;min-width:0;height:var(--h-edge);background:var(--c-overlay-40);padding:var(--gap-lg) var(--px-value);display:flex;justify-content:center;align-items:center}
+.edge__text{display:flex;flex-direction:column;align-items:center;gap:var(--sp-16);text-align:center}
+.edge__line{position:absolute;right:0;top:50%;transform:translateY(-50%);width:0;height:var(--h-edge-line)}
 .edge__line img{position:absolute;top:50%;left:50%;width:var(--h-edge-line);height:1px;max-width:none;transform:translate(-50%,-50%) rotate(90deg)}
 .edge__tt{font-size:var(--fs-h3);line-height:1;font-weight:600;color:var(--c-accent-blue)}
 .edge__sub{font-size:var(--fs-base);line-height:1.444;color:var(--c-white)}

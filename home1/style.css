@@ -46,7 +46,7 @@
   --pad:clamp(20px,2.8vw,40px);
   --sec:clamp(72px,13.89vw,200px);
   --wrap:min(1440px,calc(100% - 2 * var(--pad)));
-  --hdr:100px;
+  --hdr:90px;
   --ry:50px;
   --radius:6px;
   --radius-sm:4px;

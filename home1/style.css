@@ -254,6 +254,7 @@ em{font-style:normal;color:var(--c-brand)}
 
 /* ---------- compact desktop / large tablet ---------- */
 @media (max-width:1300px){
+  :root{--gap-nav:clamp(20px,3vw,40px)}
   .nav__menu{font-size:15px}
   .nav__cta{padding:10px 14px}
 }

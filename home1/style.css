@@ -49,6 +49,8 @@
   --ry:50px;
   --radius:6px;
   --radius-sm:4px;
+  --radius-card:clamp(20px,2.78vw,40px);   /* 서비스 사진 기본 모서리 */
+  --radius-card-lg:clamp(80px,11.11vw,160px); /* 서비스 사진 강조 모서리 */
 
   /* ===== 타이핑 Typing ===== */
   --type-speed:70ms; /* 상단 문구 글자 간격 */
@@ -162,7 +164,10 @@ em{font-style:normal;color:var(--c-brand)}
 .card{flex:1 1 0;max-width:456px;min-width:0;display:flex;flex-direction:column}
 .card--a{padding-top:var(--pt-card-a)}
 .card--c{padding-top:var(--pt-card-c)}
-.card__img{position:relative;width:100%;aspect-ratio:456/600;overflow:hidden}
+.card__img{position:relative;width:100%;aspect-ratio:456/600;overflow:hidden;border-radius:var(--radius-card)}
+.card--a .card__img{border-top-left-radius:var(--radius-card-lg)}
+.card:not(.card--a):not(.card--c) .card__img{border-top-right-radius:var(--radius-card-lg)}
+.card--c .card__img{border-bottom-right-radius:var(--radius-card-lg)}
 .card__img>img,.card__img .crop img{transition:transform .6s ease}
 .card__img:hover>img{transform:scale(1.1)}
 .card__img:hover .crop img{transform:scale(1.1)}

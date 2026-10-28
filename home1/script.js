@@ -6,7 +6,6 @@
 
   // text and image blocks per section (elements carrying their own transform are avoided)
   var groups = [
-    '.hero__eyebrow, .hero__title, .hero__cta',
     '.section-tt > *',
     '.card__img, .card__tt',
     '.logos',
@@ -100,6 +99,49 @@
   });
   window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+})();
+
+// hero: eyebrow → title typed one character at a time (no cursor), then the buttons slide up
+(function () {
+  var targets = document.querySelectorAll('.hero__eyebrow, .hero__title');
+  var cta = document.querySelector('.hero__cta');
+  var chars = [], pauses = {};
+  function split(node) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        Array.from(n.textContent).forEach(function (ch) {
+          if (/\s/.test(ch)) { frag.appendChild(document.createTextNode(ch)); return; } // 공백은 바로 표시(타이핑 시간 없음)
+          var s = document.createElement('span');
+          s.className = 'tc';
+          s.textContent = ch;
+          frag.appendChild(s);
+          chars.push(s);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeName === 'BR') {
+        pauses[chars.length - 1] = true;
+      } else {
+        split(n);
+      }
+    });
+  }
+  targets.forEach(function (el) {
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    split(el);
+    pauses[chars.length - 1] = true;
+  });
+  cta.classList.add('reveal');
+  var speed = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--type-speed')) || 70;
+  var i = 0;
+  function step() {
+    chars[i].classList.add('is-typed');
+    var pause = pauses[i];
+    i += 1;
+    if (i < chars.length) setTimeout(step, pause ? speed * 5 : speed);
+    else setTimeout(function () { cta.classList.add('is-visible'); }, speed * 3);
+  }
+  setTimeout(step, 400);
 })();
 
 // hero: play top_vod1 -> top_vod2 -> top_vod1 ... with a short crossfade

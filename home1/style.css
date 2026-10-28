@@ -50,6 +50,9 @@
   --radius:6px;
   --radius-sm:4px;
 
+  /* ===== 타이핑 Typing ===== */
+  --type-speed:70ms; /* 상단 문구 글자 간격 */
+
   /* 유동 간격(clamp) — 화면 크기에 따라 비례 확대/축소 */
   --gap-nav:clamp(24px,6.94vw,100px);
   --pt-hero:clamp(56px,23.6vh,300px);
@@ -142,6 +145,9 @@ em{font-style:normal;color:var(--c-brand)}
 .hero__title{font-size:var(--fs-hero);line-height:1.125;font-weight:600;color:var(--c-white);letter-spacing:-1px}
 .hero__title .reg{font-weight:400}
 .hero__title b{font-weight:800}
+/* 타이핑 : 글자 자리는 미리 잡아두고 순서대로 보이게(커서 없음) */
+.hero .tc{visibility:hidden}
+.hero .tc.is-typed{visibility:visible}
 .hero__cta{display:flex;flex-wrap:wrap;gap:var(--gap-hero-cta);padding-top:var(--gap-md)}
 .btn{display:inline-flex;align-items:center;border:1px solid var(--c-white);padding:var(--btn-py) var(--btn-px);font-size:var(--fs-base);line-height:26px;font-weight:400;color:var(--c-white);white-space:pre;transition:background-color .3s,color .3s}
 .btn:hover{background:var(--c-white);color:var(--c-ink)}

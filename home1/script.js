@@ -23,7 +23,6 @@
     '.proc__step',
     '.eff',
     '.rproc__head',
-    '.rstep',
     '.footer__in'
   ];
   var els = [];
@@ -44,6 +43,25 @@
     });
   }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
   els.forEach(function (el) { io.observe(el); });
+
+  // recruit process: steps appear one after another (1 -> 6)
+  var steps = document.querySelectorAll('.rstep');
+  if (steps.length) {
+    var wide = window.matchMedia('(min-width: 901px)').matches;
+    steps.forEach(function (el, i) {
+      el.classList.add('reveal');
+      el.style.setProperty('--d', wide ? i * 0.35 + 's' : '0s');
+    });
+    var host = wide ? [document.querySelector('.rsteps')] : Array.prototype.slice.call(steps);
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io2.unobserve(e.target);
+        if (wide) steps.forEach(show); else show(e.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -120px 0px' });
+    host.forEach(function (el) { io2.observe(el); });
+  }
 })();
 
 // partner logo marquee: duplicate the set so the -50% loop is seamless

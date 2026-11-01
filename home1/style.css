@@ -329,7 +329,7 @@ em{font-style:normal;color:var(--c-brand)}
 .val-wrap{display:flex;flex-direction:column;align-items:center;width:var(--wrap)}
 .val{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap-val);width:100%}
 .val__item{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0}
-.val__card{width:100%;aspect-ratio:1;padding:var(--sp-10);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-12);border:4px solid var(--c-brand);border-radius:var(--radius-card);background:var(--c-white);color:var(--c-ink);transition:background-color .4s,color .4s,transform .4s}
+.val__card{width:100%;aspect-ratio:1;padding:var(--sp-10);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-12);border:2px solid var(--c-brand);border-radius:var(--radius-card);background:var(--c-white);color:var(--c-ink);transition:background-color .4s,color .4s,transform .4s}
 .val__item:nth-child(1) .val__card{border-top-left-radius:var(--radius-card-lg)}
 .val__item:nth-child(2) .val__card{border-top-right-radius:var(--radius-card-lg)}
 .val__item:nth-child(3) .val__card{border-bottom-right-radius:var(--radius-card-lg)}

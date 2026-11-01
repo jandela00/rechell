@@ -24,7 +24,7 @@
   --c-overlay-40:rgba(0,0,0,.4);
   --c-overlay-30:rgba(0,0,0,.3);
   --c-overlay-20:rgba(0,0,0,.2);
-  --c-fill-off:#f5f5f5;                 /* 서브: CEO 큰 문구 — 아직 채워지지 않은 글자 */
+  --c-fill-off:#d9d9d9;                 /* 서브: CEO 큰 문구 — 아직 채워지지 않은 글자 */
   --c-ring:rgba(30,63,194,.2);          /* 서브: 조직도 CEO 원 바깥 링 */
   --c-funnel:rgba(30,63,194,.14);       /* 서브: 경영이념 깔때기 */
   --c-badge-from:#0032d4;               /* 서브: CEO Message 원 그라데이션 */

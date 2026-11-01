@@ -121,8 +121,7 @@
   --size-chev:clamp(8px,.83vw,12px);
   --radius-svc:clamp(20px,2.78vw,40px);
   --size-step:clamp(96px,12.5vw,180px);
-  --size-step-ic:clamp(28px,4.17vw,60px);
-  --size-badge:clamp(44px,4.17vw,60px);
+    --size-badge:clamp(44px,4.17vw,60px);
   --gap-eff:clamp(24px,8.89vw,128px);
   --py-svc:clamp(56px,6.94vw,100px);
   --size-rtile:clamp(96px,11.11vw,160px);
@@ -509,12 +508,17 @@ em{font-style:normal;color:var(--c-brand)}
 /* 인력도급 프로세스 */
 .proc{display:flex;justify-content:space-between;align-items:flex-start;width:var(--wrap)}
 .proc__step{position:relative;display:flex;flex-direction:column;align-items:center;gap:var(--sp-24);flex:1 1 0;min-width:0}
-.proc__step:not(:last-child)::after{content:"";position:absolute;top:calc(var(--size-step) / 2 - var(--size-chev));right:calc(var(--size-chev) / -2);width:var(--size-chev);height:calc(var(--size-chev) * 2);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 24' fill='none' stroke='%23222' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 5l8 7-8 7'/%3E%3C/svg%3E") center/contain no-repeat}
+.proc__step:not(:last-child)::after{content:"";position:absolute;top:0;right:calc(var(--size-step) * -.0389);width:calc(var(--size-step) * .0778);height:var(--size-step);background:url("image/service/icon/chevron.svg") center/contain no-repeat}
 .proc__ic{display:flex;align-items:center;justify-content:center;width:var(--size-step);aspect-ratio:1;border-radius:50%;transition:transform .4s ease}
 .proc__step:hover .proc__ic{transform:translateY(-6px)}
 .proc__in{display:flex;align-items:center;justify-content:center;width:88.9%;aspect-ratio:1;border-radius:50%;background:var(--c-white);color:var(--c-ink)}
-.proc__in svg{width:var(--size-step-ic);height:var(--size-step-ic)}
-.proc__in svg .a{stroke:var(--c-brand)} /* 아이콘 포인트 컬러 */
+.proc__in img{display:block;height:auto;width:calc(var(--size-step) * .3444)}
+.proc__step:nth-child(1) .proc__in img{width:calc(var(--size-step) * .3444)}
+.proc__step:nth-child(2) .proc__in img{width:calc(var(--size-step) * .3111)}
+.proc__step:nth-child(3) .proc__in img{width:calc(var(--size-step) * .3333)}
+.proc__step:nth-child(4) .proc__in img{width:calc(var(--size-step) * .3389)}
+.proc__step:nth-child(5) .proc__in img{width:calc(var(--size-step) * .3444)}
+.proc__step:nth-child(6) .proc__in img{width:calc(var(--size-step) * .3333)} /* Figma 아이콘 크기(180px 원 기준 비율) */
 .js .proc__step.is-visible:nth-child(2){animation-delay:.12s}
 .js .proc__step.is-visible:nth-child(3){animation-delay:.24s}
 .js .proc__step.is-visible:nth-child(4){animation-delay:.36s}
@@ -542,7 +546,7 @@ em{font-style:normal;color:var(--c-brand)}
 .rsteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap-svc-in) var(--gap-svc-in);flex:0 1 68%}
 .rstep{display:flex;flex-direction:column;gap:var(--sp-16);padding-left:var(--sp-32);border-left:1px solid var(--c-line-soft)}
 .rstep__ic{display:flex;align-items:center;justify-content:center;align-self:flex-end;width:var(--size-rtile);aspect-ratio:1;border-radius:clamp(16px,1.94vw,30px);background:var(--c-tint-strong);color:var(--c-ink);transition:transform .4s ease}
-.rstep__ic svg{width:42%;height:42%}
+.rstep__ic img{display:block;width:100%;height:100%}
 .rstep:hover .rstep__ic{transform:translateY(-6px)}
 .rstep__no{margin-top:var(--sp-8);font-size:var(--fs-svc-step);line-height:1;font-weight:700;color:var(--c-brand)}
 .rstep h4{font-size:var(--fs-svc-name);line-height:1.1;font-weight:700;color:var(--c-ink);letter-spacing:-.5px;white-space:nowrap}

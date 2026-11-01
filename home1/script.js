@@ -12,6 +12,11 @@
     '.edge',
     '.map',
     '.cu__head, .cu__info, .cu__form',
+    '.subtabs, .sub-title',
+    '.ceo__photo, .ceo__text',
+    '.val__item',
+    '.val__funnel, .val__sum',
+    '.tcard',
     '.footer__in'
   ];
   var els = [];
@@ -131,7 +136,8 @@
     split(el);
     pauses[chars.length - 1] = true;
   });
-  cta.classList.add('reveal');
+  if (cta) cta.classList.add('reveal');
+  if (!chars.length) return;
   var speed = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--type-speed')) || 70;
   var i = 0;
   function step() {
@@ -139,7 +145,7 @@
     var pause = pauses[i];
     i += 1;
     if (i < chars.length) setTimeout(step, pause ? speed * 5 : speed);
-    else setTimeout(function () { cta.classList.add('is-visible'); }, speed * 3);
+    else if (cta) setTimeout(function () { cta.classList.add('is-visible'); }, speed * 3);
   }
   setTimeout(step, 400);
 })();
@@ -193,4 +199,57 @@
     if (first) { msg.textContent = defaultMsg; first.focus(); return; }
     msg.textContent = '문의 접수 기능은 아직 연동되지 않았습니다.';
   });
+})();
+
+// sub pages: big sentence fills in letter by letter as it scrolls into view
+(function () {
+  var blocks = document.querySelectorAll('.fill');
+  if (!blocks.length) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = [];
+  blocks.forEach(function (el) {
+    var chars = [];
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    el.querySelectorAll('.fill__ln').forEach(function (ln) {
+      var text = ln.textContent;
+      ln.textContent = '';
+      ln.setAttribute('aria-hidden', 'true');
+      Array.from(text).forEach(function (ch) {
+        if (/\s/.test(ch)) { ln.appendChild(document.createTextNode(ch)); return; }
+        var s = document.createElement('span');
+        s.className = 'ch';
+        s.textContent = ch;
+        ln.appendChild(s);
+        chars.push(s);
+      });
+    });
+    items.push({ el: el, chars: chars });
+  });
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    items.forEach(function (it) {
+      var top = it.el.getBoundingClientRect().top;
+      var p = reduce ? 1 : Math.min(1, Math.max(0, (vh * 0.85 - top) / (vh * 0.45)));
+      var n = Math.round(p * it.chars.length);
+      it.chars.forEach(function (c, i) { c.classList.toggle('on', i < n); });
+    });
+  }
+  function req() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', req, { passive: true });
+  window.addEventListener('resize', req);
+  update();
+})();
+
+// sub pages: org chart draws in order (CEO -> lines -> teams) once it is on screen
+(function () {
+  var org = document.querySelector('.org');
+  if (!org) return;
+  org.querySelectorAll('.org__team').forEach(function (t, i) { t.style.setProperty('--i', i); });
+  if (!('IntersectionObserver' in window)) { org.classList.add('is-visible'); return; }
+  var io = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { org.classList.add('is-visible'); io.disconnect(); }
+  }, { threshold: 0.2 });
+  io.observe(org);
 })();

@@ -469,6 +469,9 @@ em{font-style:normal;color:var(--c-brand)}
 .svc-row__img{flex:0 0 50%;aspect-ratio:720/420;overflow:hidden;border-radius:var(--radius-svc)}
 .svc-row__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .svc-row:hover .svc-row__img img{transform:scale(1.05)}
+.svc-row:nth-child(1) .svc-row__img img,.svc-row:nth-child(4) .svc-row__img img,.svc-row:nth-child(5) .svc-row__img img{opacity:.92} /* Figma 사진 투명도 */
+.svc-row:nth-child(2) .svc-row__img img{opacity:.9}
+.svc-row:nth-child(3) .svc-row__img img{opacity:.95}
 .svc-row__txt{display:flex;flex-direction:column;gap:var(--sp-24);flex:1 1 auto}
 .svc-row__txt h3{font-size:var(--fs-svc-row);line-height:1;font-weight:700;color:var(--c-ink);letter-spacing:-.5px}
 .svc-row__txt p{font-size:var(--fs-base);line-height:1.45;color:var(--c-muted)}

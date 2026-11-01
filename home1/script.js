@@ -205,7 +205,6 @@
 (function () {
   var blocks = document.querySelectorAll('.fill');
   if (!blocks.length) return;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEP = 90; // ms per letter
   blocks.forEach(function (el) {
     var chars = [], timer = null, n = 0;
@@ -225,7 +224,6 @@
     });
     function play() {
       clearInterval(timer);
-      if (reduce) { chars.forEach(function (c) { c.classList.add('on'); }); return; }
       timer = setInterval(function () {
         if (n >= chars.length) { clearInterval(timer); return; }
         chars[n++].classList.add('on');

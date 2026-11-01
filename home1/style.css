@@ -288,6 +288,7 @@ em{font-style:normal;color:var(--c-brand)}
 
 /* ================= 서브페이지 (company) ================= */
 .sub{padding-top:var(--hdr)}
+.header--sub .nav__menu a:not(.nav__cta){font-weight:400}   /* Figma 서브 메뉴는 Regular */
 
 /* sub hero : 메인 히어로와 같은 타이핑 문구 + 이미지 */
 .hero--sub{height:var(--h-subhero)}

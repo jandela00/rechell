@@ -107,6 +107,25 @@
   --org-gap:clamp(40px,6.25vw,90px);
   --org-drop:clamp(40px,6.11vw,88px);
 
+  /* 서비스 페이지 */
+  --c-tint:rgba(30,63,194,.07);            /* 서비스: 프로세스 배경 */
+  --c-tint-strong:rgba(30,63,194,.08);     /* 서비스: 채용대행 아이콘 타일 */
+  --fs-svc-sec:clamp(26px,3.33vw,48px);
+  --fs-svc-row:clamp(22px,2.78vw,40px);
+  --fs-svc-name:clamp(18px,1.67vw,24px);
+  --fs-svc-step:clamp(15px,1.67vw,24px);
+  --h-svc-row:clamp(200px,29.17vw,420px);
+  --gap-svc-row:clamp(40px,6.94vw,100px);
+  --gap-svc-in:clamp(24px,5.56vw,80px);
+  --radius-svc:clamp(20px,2.78vw,40px);
+  --size-step:clamp(96px,12.5vw,180px);
+  --size-step-ic:clamp(28px,4.17vw,60px);
+  --size-badge:clamp(44px,4.17vw,60px);
+  --gap-eff:clamp(24px,8.89vw,128px);
+  --py-svc:clamp(56px,6.94vw,100px);
+  --size-rtile:clamp(96px,11.11vw,160px);
+  --w-dia:min(944px,calc(100% - 2 * var(--pad)));
+
   /* 고정 간격(px) — 화면 크기와 무관하게 일정 */
   --sp-4:4px;
   --sp-8:8px;
@@ -439,6 +458,108 @@ em{font-style:normal;color:var(--c-brand)}
   .ceo__text{font-size:var(--fs-16)}
   .val__desc br{display:none}
   .tcard__txt p br{display:none}
+}
+
+/* --- 서비스 (물류운영 · 인력도급 · 채용대행) --- */
+.subtabs--svc .subtab:first-child{width:auto;padding-left:var(--sp-24);padding-right:var(--sp-24)}
+.svc-lead{font-size:clamp(19px,5.56vw,80px)}
+.svc-rows{display:flex;flex-direction:column;gap:var(--gap-svc-row);width:var(--wrap)}
+.svc-row{display:flex;align-items:center;gap:var(--gap-svc-in)}
+.svc-row__img{flex:0 0 50%;aspect-ratio:720/420;overflow:hidden;border-radius:var(--radius-svc)}
+.svc-row__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.svc-row:hover .svc-row__img img{transform:scale(1.05)}
+.svc-row__txt{display:flex;flex-direction:column;gap:var(--sp-24);flex:1 1 auto}
+.svc-row__txt h3{font-size:var(--fs-svc-row);line-height:1;font-weight:700;color:var(--c-ink);letter-spacing:-.5px}
+.svc-row__txt p{font-size:var(--fs-base);line-height:1.45;color:var(--c-muted)}
+.svc-row:nth-child(even){flex-direction:row-reverse}
+.svc-row:nth-child(even) .svc-row__txt{align-items:flex-end;text-align:right}
+
+/* 인력도급 다이어그램 */
+.dia{position:relative;width:var(--w-dia);aspect-ratio:944/880;container-type:inline-size}
+.dia__svg{position:absolute;inset:0;width:100%;height:100%}
+.dia__ring{fill:none;stroke:var(--c-ink);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:.1 7}
+.dia__head{fill:var(--c-ink)}
+.dia__c,.dia__core,.dia__lb{position:absolute;transform:translate(-50%,-50%);text-align:center;white-space:nowrap}
+.dia__c{display:flex;align-items:center;justify-content:center;width:23.83%;aspect-ratio:1;border-radius:50%;font-weight:700;font-size:clamp(13px,3.39cqw,32px);color:var(--c-white);transition:transform .4s ease}
+.dia__c:hover{transform:translate(-50%,-50%) scale(1.06)}
+.dia__c--brand{background:var(--c-brand)}
+.dia__c--dark{background:var(--c-ink)}
+.dia__c--light{background:var(--c-fill-off);color:var(--c-ink)}
+.dia__core{font-weight:700;font-size:clamp(16px,5.51cqw,52px);line-height:1.19;color:var(--c-muted-light)}
+.dia__lb{padding:var(--sp-8) 0;background:var(--c-white);font-weight:600;font-size:clamp(11px,2.54cqw,24px);line-height:1.33;color:var(--c-muted);letter-spacing:-.5px}
+.js .dia.reveal .dia__c{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+.js .dia.is-visible .dia__c{opacity:1;transform:translate(-50%,-50%);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.61,.36,1)}
+.js .dia.is-visible .dia__c--dark{transition-delay:.25s}
+.js .dia.is-visible .dia__c--light{transition-delay:.45s}
+
+/* 공통 섹션 머리말 */
+.svc-band,.svc-eff{display:flex;flex-direction:column;align-items:center;gap:var(--gap-svc-in)}
+.svc-band{width:100%;padding:var(--py-svc) var(--pad);background:var(--c-tint)}
+.svc-head{display:flex;flex-direction:column;align-items:center;gap:var(--sp-16);text-align:center}
+.svc-head h3{font-size:var(--fs-svc-sec);line-height:1;font-weight:700;color:var(--c-ink)}
+.svc-head em,.rproc__head em{font-style:normal;color:var(--c-brand)}
+.svc-head p{font-size:var(--fs-base);line-height:1.45;color:var(--c-muted)}
+
+/* 인력도급 프로세스 */
+.proc{display:flex;justify-content:space-between;align-items:flex-start;width:var(--wrap)}
+.proc__step{position:relative;display:flex;flex-direction:column;align-items:center;gap:var(--sp-24);flex:1 1 0;min-width:0}
+.proc__step:not(:last-child)::after{content:"";position:absolute;top:calc(var(--size-step) / 2 - 6px);right:-6px;width:10px;height:10px;border-top:2px solid var(--c-ink);border-right:2px solid var(--c-ink);transform:rotate(45deg)}
+.proc__ic{display:flex;align-items:center;justify-content:center;width:var(--size-step);aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.55);transition:transform .4s ease}
+.proc__step:hover .proc__ic{transform:translateY(-6px)}
+.proc__in{display:flex;align-items:center;justify-content:center;width:88.9%;aspect-ratio:1;border-radius:50%;background:var(--c-white);color:var(--c-ink)}
+.proc__in svg{width:var(--size-step-ic);height:var(--size-step-ic)}
+.proc__step p{font-size:var(--fs-svc-step);line-height:1.17;font-weight:600;text-align:center;color:var(--c-ink)}
+
+/* 기대효과 */
+.svc-eff{width:100%}
+.effs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:var(--gap-eff);width:var(--wrap)}
+.eff{display:flex;flex-direction:column;align-items:flex-start;gap:var(--sp-24)}
+.eff__no{display:flex;align-items:center;justify-content:center;width:var(--size-badge);aspect-ratio:1;border-radius:50%;background:var(--c-brand);color:var(--c-white);font-size:var(--fs-base);font-weight:700;letter-spacing:-.5px;transition:transform .4s ease}
+.eff:hover .eff__no{transform:scale(1.1)}
+.eff h4{font-size:var(--fs-svc-name);line-height:1.1;font-weight:700;color:var(--c-ink);letter-spacing:-.5px}
+.eff p{font-size:var(--fs-base);line-height:1.45;color:var(--c-muted);letter-spacing:-.5px;text-wrap:pretty}
+.svc-eff--gray{margin-bottom:calc(-1 * var(--sec));padding:var(--py-svc) 0 var(--sec);background:var(--c-bg-soft)}
+.svc-eff--gray .effs{column-gap:var(--gap-svc-in)}
+.svc-eff--gray .svc-head{padding:0 var(--pad)}
+
+/* 채용대행 프로세스 */
+.rproc{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--gap-svc-in);width:var(--wrap)}
+.rproc__head{display:flex;flex-direction:column;gap:var(--sp-16);flex:0 0 auto;max-width:34%}
+.rproc__head h3{font-size:var(--fs-svc-sec);line-height:1.17;font-weight:700;color:var(--c-ink)}
+.rproc__head p{font-size:var(--fs-base);line-height:1.45;color:var(--c-muted)}
+.rsteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap-svc-in) var(--gap-svc-in);flex:0 1 68%}
+.rstep{display:flex;flex-direction:column;gap:var(--sp-16);padding-left:var(--sp-32);border-left:1px solid var(--c-line-soft)}
+.rstep__ic{display:flex;align-items:center;justify-content:center;align-self:flex-end;width:var(--size-rtile);aspect-ratio:1;border-radius:clamp(16px,1.94vw,30px);background:var(--c-tint-strong);color:var(--c-ink);transition:transform .4s ease}
+.rstep__ic svg{width:42%;height:42%}
+.rstep:hover .rstep__ic{transform:translateY(-6px)}
+.rstep__no{margin-top:var(--sp-8);font-size:var(--fs-svc-step);line-height:1;font-weight:700;color:var(--c-brand)}
+.rstep h4{font-size:var(--fs-svc-name);line-height:1.1;font-weight:700;color:var(--c-ink);letter-spacing:-.5px}
+.rstep p{font-size:var(--fs-base);line-height:1.45;color:var(--c-muted);letter-spacing:-.5px;text-wrap:pretty}
+
+@media (max-width:900px){
+  .svc-row,.svc-row:nth-child(even){flex-direction:column;align-items:stretch;gap:var(--sp-20)}
+  .svc-row__img{flex:none;width:100%}
+  .svc-row:nth-child(even) .svc-row__txt{align-items:flex-start;text-align:left}
+  .svc-row__txt{gap:var(--sp-12)}
+  .svc-row__txt p br{display:none}
+  .proc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-32) var(--sp-8)}
+  .proc__step:not(:last-child)::after{display:none}
+  .effs{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--sp-40)}
+  .rproc{flex-direction:column;gap:var(--sp-32)}
+  .rproc__head{max-width:none}
+  .rproc__head h3 br{display:none}
+  .rsteps{flex:none;width:100%}
+}
+@media (max-width:600px){
+  .subtabs--svc .subtab:first-child{grid-column:1 / -1}
+  .proc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .effs{grid-template-columns:minmax(0,1fr)}
+  .rsteps{grid-template-columns:minmax(0,1fr)}
+  .rstep{display:grid;grid-template-columns:var(--size-rtile) minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:var(--sp-16);row-gap:var(--sp-12);padding-left:var(--sp-16)}
+  .rstep__ic{grid-column:1;grid-row:1 / 3;align-self:start}
+  .rstep__no{grid-column:2;grid-row:1;align-self:end;margin-top:0}
+  .rstep h4{grid-column:2;grid-row:2;align-self:start}
+  .rstep p{grid-column:1 / -1;grid-row:3}
 }
 
 /* fade-in slide-up */

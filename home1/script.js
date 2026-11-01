@@ -17,6 +17,13 @@
     '.val__item',
     '.val__funnel, .val__sum',
     '.tcard',
+    '.svc-row__img, .svc-row__txt',
+    '.dia',
+    '.svc-head',
+    '.proc__step',
+    '.eff',
+    '.rproc__head',
+    '.rstep',
     '.footer__in'
   ];
   var els = [];

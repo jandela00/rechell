@@ -91,7 +91,7 @@
   --h-edge-line:clamp(160px,14.72vw,212px);
 
   /* 서브페이지 여백·크기 */
-  --h-subhero:clamp(260px,36.8vw,530px);
+  --h-subhero:clamp(240px,20.7vw,530px);   /* Figma 2560x530 비율 */
   --h-team:clamp(150px,13.89vw,200px);
   --tab-w:clamp(88px,9.72vw,140px);
   --gap-tab:clamp(8px,2.22vw,32px);

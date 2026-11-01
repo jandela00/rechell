@@ -201,14 +201,14 @@
   });
 })();
 
-// sub pages: big sentence fills in letter by letter as it scrolls into view
+// sub pages: big sentence turns from gray to black one letter at a time when it enters the screen
 (function () {
   var blocks = document.querySelectorAll('.fill');
   if (!blocks.length) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = [];
+  var STEP = 90; // ms per letter
   blocks.forEach(function (el) {
-    var chars = [];
+    var chars = [], timer = null, n = 0;
     el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
     el.querySelectorAll('.fill__ln').forEach(function (ln) {
       var text = ln.textContent;
@@ -216,30 +216,31 @@
       ln.setAttribute('aria-hidden', 'true');
       Array.from(text).forEach(function (ch) {
         if (/\s/.test(ch)) { ln.appendChild(document.createTextNode(ch)); return; }
-        var s = document.createElement('span');
-        s.className = 'ch';
-        s.textContent = ch;
-        ln.appendChild(s);
-        chars.push(s);
+        var sp = document.createElement('span');
+        sp.className = 'ch';
+        sp.textContent = ch;
+        ln.appendChild(sp);
+        chars.push(sp);
       });
     });
-    items.push({ el: el, chars: chars });
+    function play() {
+      clearInterval(timer);
+      if (reduce) { chars.forEach(function (c) { c.classList.add('on'); }); return; }
+      timer = setInterval(function () {
+        if (n >= chars.length) { clearInterval(timer); return; }
+        chars[n++].classList.add('on');
+      }, STEP);
+    }
+    function reset() {
+      clearInterval(timer); n = 0;
+      chars.forEach(function (c) { c.classList.remove('on'); });
+    }
+    if (!('IntersectionObserver' in window)) { chars.forEach(function (c) { c.classList.add('on'); }); return; }
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { if (n === 0) play(); }
+      else if (entries[0].boundingClientRect.top > 0 || n >= chars.length) { reset(); } // leave: replay next time
+    }, { threshold: 0.6 }).observe(el);
   });
-  var ticking = false;
-  function update() {
-    ticking = false;
-    var vh = window.innerHeight;
-    items.forEach(function (it) {
-      var top = it.el.getBoundingClientRect().top;
-      var p = reduce ? 1 : Math.min(1, Math.max(0, (vh * 0.85 - top) / (vh * 0.45)));
-      var n = Math.round(p * it.chars.length);
-      it.chars.forEach(function (c, i) { c.classList.toggle('on', i < n); });
-    });
-  }
-  function req() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-  window.addEventListener('scroll', req, { passive: true });
-  window.addEventListener('resize', req);
-  update();
 })();
 
 // sub pages: org chart draws in order (CEO -> lines -> teams) once it is on screen

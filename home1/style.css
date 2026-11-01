@@ -378,6 +378,7 @@ em{font-style:normal;color:var(--c-brand)}
 .talent__row--2 .tcard:nth-child(2){border-bottom-right-radius:var(--radius-card-lg)}
 .tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .tcard:hover img{transform:scale(1.1)}
+.tcard img.tcard__img--crop{inset:auto;left:-146.93%;top:-77.08%;width:374.21%;height:177.75%;max-width:none;object-fit:fill;opacity:.9} /* 혁신&창조적인 인재: Figma 크롭 위치(노을 실루엣) */
 .tcard::after{content:"";position:absolute;inset:0;background:var(--c-overlay-20);transition:background-color .4s}
 .tcard:hover::after{background:var(--c-overlay-40)}
 .tcard__txt{position:absolute;z-index:1;left:0;right:0;top:64%;display:flex;flex-direction:column;align-items:center;gap:var(--sp-12);text-align:center}
@@ -533,7 +534,7 @@ em{font-style:normal;color:var(--c-brand)}
 .rstep__ic svg{width:42%;height:42%}
 .rstep:hover .rstep__ic{transform:translateY(-6px)}
 .rstep__no{margin-top:var(--sp-8);font-size:var(--fs-svc-step);line-height:1;font-weight:700;color:var(--c-brand)}
-.rstep h4{font-size:var(--fs-svc-name);line-height:1.1;font-weight:700;color:var(--c-ink);letter-spacing:-.5px}
+.rstep h4{font-size:var(--fs-svc-name);line-height:1.1;font-weight:700;color:var(--c-ink);letter-spacing:-.5px;white-space:nowrap}
 .rstep p{font-size:var(--fs-base);line-height:1.45;color:var(--c-muted);letter-spacing:-.5px;text-wrap:pretty}
 
 @media (max-width:900px){
@@ -547,7 +548,9 @@ em{font-style:normal;color:var(--c-brand)}
   .effs{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--sp-40)}
   .rproc{flex-direction:column;gap:var(--sp-32)}
   .rproc__head{max-width:none}
-  .rproc__head h3 br{display:none}
+  .rproc__head h3 br,.rproc__head p br,.rstep p br,.eff p br{display:none}
+  .rstep h4{white-space:normal}
+  .rstep p,.rproc__head p,.svc-eff--gray .eff p,.svc-eff--gray .eff h4{white-space:normal;text-wrap:pretty}
   .rsteps{flex:none;width:100%}
 }
 @media (max-width:600px){
@@ -560,6 +563,14 @@ em{font-style:normal;color:var(--c-brand)}
   .rstep__no{grid-column:2;grid-row:1;align-self:end;margin-top:0}
   .rstep h4{grid-column:2;grid-row:2;align-self:start}
   .rstep p{grid-column:1 / -1;grid-row:3}
+}
+
+@media (min-width:1201px){
+  .rproc .rstep p,.rproc .rproc__head p,.svc-eff--gray .eff p,.svc-eff--gray .eff h4{white-space:nowrap;text-wrap:nowrap} /* Figma 줄바꿈 그대로 */
+}
+
+@media (max-width:1200px){
+  .rproc__head p br,.rstep p br,.svc-eff--gray .eff p br{display:none}
 }
 
 /* fade-in slide-up */

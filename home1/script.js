@@ -22,7 +22,6 @@
     '.svc-head',
     '.proc__step',
     '.eff',
-    '.pcard',
     '.rproc__head',
     '.footer__in'
   ];
@@ -44,6 +43,22 @@
     });
   }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
   els.forEach(function (el) { io.observe(el); });
+
+  // partners: cards appear row by row, left -> right
+  var cards = document.querySelectorAll('.pcard');
+  if (cards.length) {
+    cards.forEach(function (el) { el.classList.add('reveal'); });
+    var io3 = new IntersectionObserver(function (entries) {
+      var hit = entries.filter(function (e) { return e.isIntersecting; }).map(function (e) { return e.target; });
+      hit.sort(function (x, y) { return Array.prototype.indexOf.call(cards, x) - Array.prototype.indexOf.call(cards, y); });
+      hit.forEach(function (el, i) {
+        io3.unobserve(el);
+        el.style.setProperty('--d', i * 0.2 + 's');
+        show(el);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
+    cards.forEach(function (el) { io3.observe(el); });
+  }
 
   // recruit process: steps appear one after another (1 -> 6)
   var steps = document.querySelectorAll('.rstep');

@@ -97,6 +97,16 @@
   --gap-tab:clamp(8px,2.22vw,32px);
   --pt-tabs:clamp(28px,3.47vw,50px);
   --gap-sub:clamp(48px,6.94vw,100px);
+  --gap-pcard:clamp(12px,2.5vw,36px);              /* 파트너스: 카드 사이 간격 */
+  --px-pcard:clamp(16px,1.67vw,24px);              /* 파트너스: 카드 좌우 안쪽 여백 */
+  --py-pcard:clamp(20px,2.22vw,32px);              /* 파트너스: 카드 위아래 안쪽 여백 */
+  --gap-pin:clamp(14px,1.67vw,24px);               /* 파트너스: 카드 안 요소 간격 */
+  --h-plogo:clamp(56px,6.25vw,90px);               /* 파트너스: 로고 영역 높이 */
+  --fs-pname:clamp(18px,1.67vw,24px);              /* 파트너스: 지점명 */
+  --lh-pdesc:clamp(22px,2.22vw,32px);              /* 파트너스: 설명 줄 높이 */
+  --radius-pcard:clamp(20px,2.78vw,40px);          /* 파트너스: 카드 모서리 */
+  --c-hero-from:#1b2a52;                           /* 파트너스: 히어로 이미지 없을 때 배경 */
+  --c-hero-to:#0c1226;
   --gap-val:clamp(16px,6.25vw,90px);
   --gap-talent:clamp(12px,2.5vw,36px);
   --gap-funnel:clamp(24px,3.47vw,50px);
@@ -587,6 +597,32 @@ em{font-style:normal;color:var(--c-brand)}
 @media (max-width:1200px){
   .rproc__head p br,.rstep p br,.svc-eff--gray .eff p br{display:none}
 }
+
+/* --- PARTNERS 고객사 현황 --- */
+.hero--partners{background:linear-gradient(120deg,var(--c-hero-from),var(--c-hero-to))}
+.sub-body--partners{padding-top:var(--gap-sub)}
+.pgrid{list-style:none;width:var(--wrap);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap-pcard)}
+.pcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--gap-pin);padding:var(--py-pcard) var(--px-pcard);border:1px solid var(--c-line-soft);border-radius:var(--radius-pcard);background:var(--c-white);text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s}
+.pcard:hover{transform:translateY(-6px);border-color:var(--c-brand);box-shadow:0 12px 28px rgba(30,63,194,.12)}
+.pcard__logo{position:relative;width:100%;height:var(--h-plogo)}
+.pcard__img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);object-fit:contain}
+.pcard__img--lx{width:72%;height:53%}
+.pcard__img--lotte{width:87%;height:73%}
+.pcard__img--dw{width:63%;height:64%}
+.pcard__img--star{width:74%;height:69%}
+.pcard__img--cjf{width:56%;height:100%}
+.pcard__img--brand{width:74%;height:100%}
+.pcard__img--cjw{width:46%;height:64%}
+.pcard__img--grain{width:48%;height:89%}
+.pcard__img--oned{width:73%;height:67%}
+.pcard__img--ez{width:82%;height:67%}
+.pcard__img--coca{width:60%;height:76%}
+.pcard__line{width:100%;height:1px;border:0;background:var(--c-line-soft)}
+.pcard__name{font-size:var(--fs-pname);line-height:1;font-weight:700;letter-spacing:-.5px;color:var(--c-brand)}
+.pcard__desc{font-size:var(--fs-base);line-height:var(--lh-pdesc);letter-spacing:-.5px;color:var(--c-ink);text-wrap:balance}
+.pcard__desc b{font-weight:700}
+@media (max-width:900px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.pgrid{grid-template-columns:minmax(0,1fr)}}
 
 /* fade-in slide-up */
 @keyframes slideUp{from{opacity:0;transform:translateY(var(--ry))}to{opacity:1;transform:translateY(0)}}

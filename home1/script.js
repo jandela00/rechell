@@ -22,6 +22,7 @@
     '.svc-head',
     '.proc__step',
     '.eff',
+    '.pcard',
     '.rproc__head',
     '.footer__in'
   ];
